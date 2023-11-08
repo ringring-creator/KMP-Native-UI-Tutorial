@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
@@ -32,7 +33,10 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val greetingsFlow by mainViewModel.greetingList.collectAsStateWithLifecycle()
                     val greetList = Greeting().greetList()
-                    GreetingView(greetingsFlow)
+                    Column {
+                        GreetingView(greetList)
+                        GreetingView(greetingsFlow)
+                    }
                 }
             }
         }
