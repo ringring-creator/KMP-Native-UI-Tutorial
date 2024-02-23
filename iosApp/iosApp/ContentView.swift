@@ -10,7 +10,7 @@ struct ContentView: View {
     var body: some View {
         VStack{
             ListView(phrases: phrases)
-            ListView(phrases: viewModel.greetings)
+            ListView(phrases: viewModel.greetingList)
                 .onAppear { self.viewModel.startObserving() }
         }
     }
@@ -29,14 +29,14 @@ struct ListView: View {
 extension ContentView {
     @MainActor
     class ViewModel: ObservableObject {
-        @Published var greetings: Array<String> = []
+        @Published var greetingList: Array<String> = []
 
         func startObserving() {
             Task{
                 do {
                     let sequence = asyncSequence(for: Greeting().greetFlow())
                     for try await phrase in sequence {
-                        self.greetings.append(phrase)
+                        self.greetingList.append(phrase)
                     }
                 } catch {
                     print("Failed with error: \(error)")
