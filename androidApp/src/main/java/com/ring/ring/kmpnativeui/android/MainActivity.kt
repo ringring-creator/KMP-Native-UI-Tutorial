@@ -10,9 +10,11 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.*
+import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,18 +35,27 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val greetingsFlow by mainViewModel.greetingList.collectAsStateWithLifecycle()
                     val greetList = Greeting().greetList()
-                    Column {
-                        GreetingView(greetList)
-                        GreetingView(greetingsFlow)
-                    }
+                    ContentView(greetList, greetingsFlow)
                 }
             }
         }
     }
+
 }
 
 @Composable
-fun GreetingView(phrases: List<String>) {
+private fun ContentView(
+    greetList: List<String>,
+    greetingsFlow: List<String>
+) {
+    Column {
+        GreetingView(greetList)
+        GreetingView(greetingsFlow)
+    }
+}
+
+@Composable
+private fun GreetingView(phrases: List<String>) {
     LazyColumn(
         contentPadding = PaddingValues(20.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -58,7 +69,7 @@ fun GreetingView(phrases: List<String>) {
 
 @Preview
 @Composable
-fun DefaultPreview() {
+private fun DefaultPreview() {
     MyApplicationTheme {
         GreetingView(listOf("Hello", "Android!"))
     }
