@@ -24,6 +24,7 @@ class Greeting {
         emit("Guess what is is, ${platform.name}!")
         delay(1.seconds)
         emit(daysPhrase)
+        delay(1.seconds)
         emit(rocketComponent.launchPhrase())
     }
 
