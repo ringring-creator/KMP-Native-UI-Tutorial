@@ -21,8 +21,6 @@ class Greeting {
     fun greetFlow(): Flow<String> = flow {
         emit(if (Random.nextBoolean()) "Hi!" else "Hello!")
         delay(1.seconds)
-        emit("Guess what is is, ${platform.name}!")
-        delay(1.seconds)
         emit(daysPhrase)
         delay(1.seconds)
         emit(rocketComponent.launchPhrase())
@@ -31,7 +29,6 @@ class Greeting {
     fun greetList(): List<String> = buildList {
         add(if (Random.nextBoolean()) "Hi!" else "Hello!")
         add("Guess what is is, ${platform.name}!")
-        add(daysPhrase)
     }
 
     private fun daysUntilNewYear(): Int {
